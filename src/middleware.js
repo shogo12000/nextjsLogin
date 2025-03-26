@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
 const JWT_SECRET = process.env.JWT_SECRET || "seu_segredo_super_secreto";
@@ -11,10 +11,11 @@ export async function middleware(req) {
   if (!token) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
-
+  console.log("PASSOU123")
   try {
-    // Verifica o token JWT usando jsonwebtoken
-    jwt.verify(token, JWT_SECRET);
+    // Verifica o token JWT usando jose
+    const { payload } = await jwtVerify(token, new TextEncoder().encode(JWT_SECRET));
+    console.log("PASSOU")
     return NextResponse.next();
   } catch (error) {
     console.error("Erro na verificação do token:", error);
