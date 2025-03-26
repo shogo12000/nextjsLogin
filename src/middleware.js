@@ -7,12 +7,12 @@ const JWT_SECRET = process.env.JWT_SECRET || "seu_segredo_super_secreto";
 export async function middleware(req) {
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
-
+  console.log("middleware 0");
   if (!token) {
     console.log("Token não encontrado, redirecionando para /login");
     return NextResponse.redirect(new URL("/login", req.url));
   }
-
+  console.log("middleware 1");
   try {
     // Verifica o token JWT usando jose
     const { payload } = await jwtVerify(token, new TextEncoder().encode(JWT_SECRET));
