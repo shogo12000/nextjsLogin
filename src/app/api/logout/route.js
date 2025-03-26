@@ -10,5 +10,7 @@ export async function POST() {
     path: "/",
   });
 
+  response.cookies.delete("auth_token");
+
   return response;
 }

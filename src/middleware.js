@@ -9,16 +9,21 @@ export async function middleware(req) {
   const token = cookieStore.get("auth_token")?.value;
 
   if (!token) {
+    console.log("Token não encontrado, redirecionando para /login");
     return NextResponse.redirect(new URL("/login", req.url));
   }
-  console.log("PASSOU123")
+
   try {
     // Verifica o token JWT usando jose
     const { payload } = await jwtVerify(token, new TextEncoder().encode(JWT_SECRET));
-    console.log("PASSOU")
-    return NextResponse.next();
+    console.log("Token verificado com sucesso:", payload);
+
+    // Configura cabeçalhos para evitar cache
+    const response = NextResponse.next();
+    response.headers.set("Cache-Control", "no-store");
+    return response;
   } catch (error) {
-    console.error("Erro na verificação do token:", error);
+    console.error("Erro na verificação do token:", error.message);
     return NextResponse.redirect(new URL("/login", req.url));
   }
 }
