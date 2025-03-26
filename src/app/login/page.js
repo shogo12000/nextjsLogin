@@ -20,7 +20,10 @@ export default function Login() {
       body: JSON.stringify(formData),
     });
 
+    console.log(res);
+    console.log("deu ok")
     if (res.ok) {
+      console.log("tah no ok");
       router.push("/dashboard/user"); // Redireciona após login
     } else {
       const errorData = await res.json();
