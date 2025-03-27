@@ -40,17 +40,12 @@ export const config = {
   matcher: ["/:path*"],
 };
 
-export async function middleware(req) {
-  const response = NextResponse.next();
-  const myCookie = response.cookies.get("auth_token");
-  console.log("myCookie");
-  console.log(myCookie);
-  console.log(response.cookies.get("auth_token"));
-  console.log("..............fim")
-
+export async function middleware(req) { 
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
 
+  console.log("............")
+  console.log(req.cookies.get("auth_token"));
   console.log(token);
   console.log("middleware 0");
 
