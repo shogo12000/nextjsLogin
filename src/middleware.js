@@ -1,6 +1,6 @@
-// import { NextResponse } from "next/server";
-// import { jwtVerify } from "jose";
-// import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import { jwtVerify } from "jose";
+import { cookies } from "next/headers";
 
 // const JWT_SECRET = process.env.JWT_SECRET || "seu_segredo_super_secreto";
 
