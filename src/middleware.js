@@ -41,6 +41,13 @@ export const config = {
 };
 
 export async function middleware(req) {
+  const response = NextResponse.next();
+  const myCookie = response.cookies.get("auth_token");
+  console.log("myCookie");
+  console.log(myCookie);
+  console.log(response.cookies.get("auth_token"));
+  console.log("..............fim")
+
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
 
