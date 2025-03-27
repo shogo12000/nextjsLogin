@@ -6,7 +6,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "seu_segredo_super_secreto";
 
 export async function middleware(req) {
   const cookieStore =  cookies();
-  const token = cookieStore.get("auth_token")?.value;
+  const token = cookieStore.get("auth_token");
   console.log(token);
   console.log("middleware 0");
   if (!token) {
