@@ -41,7 +41,7 @@ export const config = {
 };
 
 export async function middleware(req) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
 
   console.log(token);
